@@ -1,4 +1,4 @@
-#DegenToken
+# DegenToken
 
 Simple Overview
 DegenToken is an ERC20 token deployed on the Avalanche network for Degen Gaming. This token facilitates in-game rewards, item exchanges, and token management for players.
