@@ -28,15 +28,15 @@ Compile the Code:
 2.Ensure the "Compiler" option is set to a compatible version, such as "0.8.24".
 3.Click on the "Compile Degen.sol" button.
 Deploy the Contract:
-1.Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
-2.Select the "DegenToken" contract from the dropdown menu.
-3.Click on the "Deploy" button.
+4.Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
+5.Select the "DegenToken" contract from the dropdown menu.
+6.Click on the "Deploy" button.
 Interact with the Contract:
-1.Minting Tokens: Use the mintToken function to mint tokens for buyers in the queue.
-2.Transferring Tokens: Use the transferDegen function to transfer tokens to another player.
-3.Redeeming Tokens: Use the redeemyourloot function to redeem tokens for loot cards.
-4.Checking Balance: Use the checkYourBalance function to check your token balance.
-5.Burning Tokens: Use the burnDegen function to burn tokens you own.
+7.Minting Tokens: Use the mintToken function to mint tokens for buyers in the queue.
+8.Transferring Tokens: Use the transferDegen function to transfer tokens to another player.
+9.Redeeming Tokens: Use the redeemyourloot function to redeem tokens for loot cards.
+10.Checking Balance: Use the checkYourBalance function to check your token balance.
+11.Burning Tokens: Use the burnDegen function to burn tokens you own.
 ```
 /*Your task is to create a ERC20 token and deploy it on the Avalanche network for Degen Gaming.
 The smart contract should have the following functionality:
