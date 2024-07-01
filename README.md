@@ -11,7 +11,8 @@ DegenToken is a custom ERC20 token created for Degen Gaming on the Avalanche net
 
 ### Installing
 
-To run this program, you will need to use Remix, an online Solidity IDE. Follow these steps to get started:
+To run this program, you will need to use Remix, an online Solidity IDE. 
+Follow these steps to get started:
 
 1.Visit Remix: Go to Remix.
 2.Create a New File: Click on the "+" icon in the left-hand sidebar to create a new file.
@@ -143,8 +144,6 @@ contract DegenToken is ERC20,Ownable,ERC20Burnable{
 ```
 
 ## Help
-
-Common Issues:
 
 Common Issues:
 
