@@ -13,30 +13,29 @@ DegenToken is a custom ERC20 token created for Degen Gaming on the Avalanche net
 
 To run this program, you will need to use Remix, an online Solidity IDE. Follow these steps to get started:
 
-Visit Remix: Go to https://remix.ethereum.org/.
-Create a New File: Click on the "+" icon in the left-hand sidebar to create a new file.
-Save the File: Save the file with a .sol extension (e.g., degen.sol).
-Copy and Paste Code: Copy and paste the following code into the new file:
+1.Visit Remix: Go to Remix.
+2.Create a New File: Click on the "+" icon in the left-hand sidebar to create a new file.
+3.Save the File: Save the file with a .sol extension (e.g., degen.sol).
+4.Copy and Paste Code: Copy and paste the following code into the new file:
 
 ### Executing program
 
 To run the program, follow these steps:
 
 Compile the Code:
-
-Click on the "Solidity Compiler" tab in the left-hand sidebar.
-Ensure the "Compiler" option is set to a compatible version, such as "0.8.23".
-Click on the "Compile Degen.sol" button.
+1.Click on the "Solidity Compiler" tab in the left-hand sidebar.
+2.Ensure the "Compiler" option is set to a compatible version, such as "0.8.24".
+3.Click on the "Compile Degen.sol" button.
 Deploy the Contract:
-
-Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
-Select the "Degen" contract from the dropdown menu.
-Click on the "Deploy" button.
+1.Click on the "Deploy & Run Transactions" tab in the left-hand sidebar.
+2.Select the "DegenToken" contract from the dropdown menu.
+3.Click on the "Deploy" button.
 Interact with the Contract:
-
-Minting Tokens: Upon deployment, 10 DGN tokens are minted to the contract address.
-Creating Tokens: Call the createTokens function.
-Destroying Tokens: Call the destroyTokens function with the amount to burn tokens .
+1.Minting Tokens: Use the mintToken function to mint tokens for buyers in the queue.
+2.Transferring Tokens: Use the transferDegen function to transfer tokens to another player.
+3.Redeeming Tokens: Use the redeemyourloot function to redeem tokens for loot cards.
+4.Checking Balance: Use the checkYourBalance function to check your token balance.
+5.Burning Tokens: Use the burnDegen function to burn tokens you own.
 ```
 /*Your task is to create a ERC20 token and deploy it on the Avalanche network for Degen Gaming.
 The smart contract should have the following functionality:
@@ -147,15 +146,14 @@ contract DegenToken is ERC20,Ownable,ERC20Burnable{
 
 Common Issues:
 
-Insufficient Tokens for Exchange or Transfer:
-Ensure you have enough tokens in your balance before performing exchange or transfer operations. Use viewBalance to check your balance.
+Common Issues:
 
-Invalid Recipient Address:
-When transferring tokens, make sure the recipient address is valid and not the zero address.
+Insufficient Tokens for Exchange or Transfer: Ensure you have enough tokens in your balance before performing exchange or transfer operations. Use checkYourBalance to check your balance.
+Invalid Recipient Address: When transferring tokens, make sure the recipient address is valid and not the zero address.
 ## Authors
 
 Srishti
-@Srishti
+
 
 ## License
 
