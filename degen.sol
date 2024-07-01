@@ -1,3 +1,14 @@
+/*Your task is to create a ERC20 token and deploy it on the Avalanche network for Degen Gaming.
+The smart contract should have the following functionality:
+
+1. Minting new tokens: The platform should be able to create new tokens and distribute them to players as rewards. 
+Only the owner can mint tokens.
+2. Transferring tokens: Players should be able to transfer their tokens to others.
+3. Redeeming tokens: Players should be able to redeem their tokens for items in the in-game store.
+4. Checking token balance: Players should be able to check their token balance at any time.
+5. Burning tokens: Anyone should be able to burn tokens, that they own, that are no longer needed.  */
+
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
@@ -5,87 +16,87 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract TokenDegen is ERC20, Ownable, ERC20Burnable {
+contract DegenToken is ERC20,Ownable,ERC20Burnable{
 
-    constructor() ERC20("Degen", "DGN") Ownable(msg.sender) {}
+    constructor() ERC20("Degen", "DGN") Ownable(msg.sender){}
 
-    // Enum for collectible items
-    enum Collectibles {Common, Uncommon, Rare, UltraRare, Legendary}
+     // Items name available for Loot
+    enum loot{common,rare,unique,legend}
 
-    struct Buyer {
-        address buyerAddress;
-        uint quantity;
+     struct Player{
+     address toAddress;
+     uint amount;
+
     }
-    // Queue for buyers wanting to purchase TokenDegen
-    Buyer[] public buyerQueue;
 
-    struct UserCollectibles {
+   //The queue of player for buying degenToken 
+    Player[] public players;
+
+    struct PlayerLoot{
+        
         uint common;
-        uint uncommon;
         uint rare;
-        uint ultraRare;
-        uint legend;
+        uint unique;
+        uint legend;        
     }
 
-    // Mapping to store redeemed collectibles
-    mapping(address => UserCollectibles) public userCollectibles;
+    //To store the redeemed player loot cards
+    mapping (address=>PlayerLoot) public playerCards;
 
-    function purchaseTokens(address _buyerAddress, uint _quantity) public {
-        buyerQueue.push(Buyer({buyerAddress: _buyerAddress, quantity: _quantity}));
+    function buyDegen(address _toAddress,uint _amount)public{
+        players.push(Player({toAddress:_toAddress,amount:_amount}));
     }
 
-    // Mint tokens for buyers in the queue
-    function mintTokens() public onlyOwner {
-        // Loop to mint tokens for buyers in the queue
-        while (buyerQueue.length != 0) {
-            uint index = buyerQueue.length - 1;
-            if (buyerQueue[index].buyerAddress != address(0)) { // Check for non-zero address
-                _mint(buyerQueue[index].buyerAddress, buyerQueue[index].quantity);
-                buyerQueue.pop();
+    //minting of tokens for the buyers in the queue
+    function mintToken() public onlyOwner {
+        //loop to mint tokens for buyers in queue
+        while (players.length!=0) {
+            uint i = players.length -1;
+            if (players[i].toAddress != address(0)) { // Check for non-zero address
+            _mint(players[i].toAddress, players[i].amount);
+            players.pop();
             }
         }
     }
     
-    // Transfer tokens to another user
-    function transferTokens(address _recipient, uint _quantity) public {
-        require(_quantity <= balanceOf(msg.sender), "Insufficient balance");
-        _transfer(msg.sender, _recipient, _quantity);
+    //Transfer function for transferring tokens to other player
+    function transferDegen(address _to, uint _amount)public {
+        require(_amount<=balanceOf(msg.sender),"INSUFFICIENT");
+        _transfer(msg.sender, _to, _amount);
     }
 
-    // Redeem different collectibles
-    function redeemCollectibles(Collectibles _collectible) public {
-        if (_collectible == Collectibles.Common) {
-            require(balanceOf(msg.sender) >= 15, "Insufficient balance");
-            userCollectibles[msg.sender].common += 1;
+
+
+    //Redeem different loot cards
+    function redeemyourloot( loot _card)public{
+        if(_card == loot.common){
+            require(balanceOf(msg.sender)>=15,"INSUFFICIENT");
+            playerCards[msg.sender].common +=1;
             burn(15);
-        } else if (_collectible == Collectibles.Uncommon) {
-            require(balanceOf(msg.sender) >= 25, "Insufficient balance");
-            userCollectibles[msg.sender].uncommon += 1;
+        }else if(_card == loot.rare){
+            require(balanceOf(msg.sender)>=25,"Insufficient");
+            playerCards[msg.sender].rare +=1;
             burn(25);
-        } else if (_collectible == Collectibles.Rare) {
-            require(balanceOf(msg.sender) >= 35, "Insufficient balance");
-            userCollectibles[msg.sender].rare += 1;
+        }else if(_card == loot.unique){
+            require(balanceOf(msg.sender)>=35,"INSUFFICIENT");
+            playerCards[msg.sender].unique +=1;
             burn(35);
-        } else if (_collectible == Collectibles.UltraRare) {
-            require(balanceOf(msg.sender) >= 45, "Insufficient balance");
-            userCollectibles[msg.sender].ultraRare += 1;
-            burn(45);
-        } else if (_collectible == Collectibles.Legendary) {
-            require(balanceOf(msg.sender) >= 60, "Insufficient balance");
-            userCollectibles[msg.sender].legend += 1;
+        }else if(_card == loot.legend){
+            require(balanceOf(msg.sender)>=60,"INSUFFICIENT");
+            playerCards[msg.sender].legend +=1;
             burn(60);
-        } else {
-            revert("Invalid collectible selected");
+        }else{
+            revert("NOT AMONGST AVAILABLE CARDS");
         }
     }
 
-    // Function to burn tokens
-    function burnTokens(address _holder, uint _quantity) public {
-        _burn(_holder, _quantity);
+    //function to burn token
+    function burnDegen(address _of, uint amount)public {
+        _burn(_of, amount);
     }
 
-    // Function to check the balance of tokens
-    function getBalance() public view returns (uint) {
+    //function to check the balance of tokens
+    function checkYourBalance()public view returns(uint){
         return balanceOf(msg.sender);
     }
 }
